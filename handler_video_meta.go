@@ -95,7 +95,15 @@ func (cfg *apiConfig) handlerVideoGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondWithJSON(w, http.StatusOK, video)
+	payload := database.Video{
+		ID:           videoID,
+		CreatedAt:    video.CreatedAt,
+		UpdatedAt:    video.UpdatedAt,
+		ThumbnailURL: video.ThumbnailURL,
+		VideoURL:     video.VideoURL,
+	}
+
+	respondWithJSON(w, http.StatusOK, payload)
 }
 
 func (cfg *apiConfig) handlerVideosRetrieve(w http.ResponseWriter, r *http.Request) {
